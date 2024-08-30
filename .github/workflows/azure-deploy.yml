@@ -65,10 +65,14 @@ jobs:
        rm -rf _actions
        rm -rf _PipelineMapping
        rm -rf _temp
+   - name: Azure login
+     uses: azure/login@v2
+     with:
+      creds: ${{ secrets.AZURE_SERVICE_PRINCIPAL }}
  
    - name: Deploy to Azure Web App
      uses: azure/webapps-deploy@v3
      with:
-       app-name: 'account-microservice-webapp'  # Matches the "msdeploySite" in your publish profile
-       publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Ensure this secret contains the publish profile XML content
-       package: ${{ github.workspace }}  
+      app-name: 'account-microservice-webapp'  # Matches the "msdeploySite" in your publish profile
+      publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Ensure this secret contains the publish profile XML content
+      package: ${{ github.workspace }}  
