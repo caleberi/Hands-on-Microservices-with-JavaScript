@@ -66,12 +66,10 @@ jobs:
        rm -rf _PipelineMapping
        rm -rf _temp
    - name: Azure login
-     uses: azure/login@v2
+     uses: azure/login@v1
      with:
-      client-id: ${{ secrets.AZURE_CLIENT_ID }}
-      subscription-id: ${{ secrets.AZURE_CLIENT_SECRET }}
-      tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-    
+      creds: ${{ secrets.AZURE_SERVICE_PRINCIPAL }}
+      
    - name: Deploy to Azure Web App
      uses: azure/webapps-deploy@v3
      with:
